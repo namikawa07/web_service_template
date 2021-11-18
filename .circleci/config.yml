@@ -1,0 +1,85 @@
+version: 2.1
+
+jobs:
+  test_backend:
+    docker:
+    # dockerイメージで使っているrubyバージョンと一致させる
+      - image: circleci/ruby:2.6.5-stretch-node
+        environment:
+          RAILS_ENV: test
+          DB_HOST: 127.0.0.1
+          DB_PASSWORD: ''
+      - image: circleci/postgres:9.6.2-alpine
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: circleci_testdb
+          POSTGRES_HOST_AUTH_METHOD: trust # パスワードなし
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # restore gem from cache
+      - restore_cache:
+          keys:
+            - gem-cache-v1-{{ checksum "~/repo/Gemfile.lock" }}
+            - gem-cache-v1-
+          working_directory: ~/repo
+
+      # gem install
+      - run:
+          command: |
+            gem install bundler
+            bundle config set path 'vendor/bundle'
+            bundle install --jobs=4 --retry=3
+          working_directory: ~/repo
+
+      - save_cache:
+          key: gem-cache-v1-{{ checksum "~/repo/Gemfile.lock" }}
+          paths:
+            - ~/repo/backend/vendor/bundle
+          working_directory: ~/repo
+
+      # Database setup
+      - run:
+          command: bundle exec rails db:create
+          working_directory: ~/repo
+      - run:
+          command: bundle exec rails db:migrate
+          working_directory: ~/repo
+
+      - run:
+          name: create directory to store test results
+          command: mkdir /tmp/test-results
+          working_directory: ~/repo
+
+      # run tests
+      - run:
+          name: RSpec
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out test_results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+          working_directory: ~/repo
+
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+      - store_artifacts:
+          path: /home/circleci/repo/tmp/screenshots
+
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test_backend:
+          filters:
+            branches:
+              ignore: develop
