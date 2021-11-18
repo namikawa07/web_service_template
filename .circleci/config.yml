@@ -54,6 +54,9 @@ jobs:
           command: mkdir /tmp/test-results
           working_directory: ~/repo
 
+      # run rubocop
+      - run: bundle exec rubocop
+    
       # run tests
       - run:
           name: RSpec
