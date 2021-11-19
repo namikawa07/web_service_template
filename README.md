@@ -8,8 +8,23 @@ URL: http://localhost:3200/
 
 ## pgAdmin
 URL: http://localhost:8080/
+
 id: postgres@linuxhint.com
-pass: 1235678
+
+password: 1235678
+
+## docker立ち上げ
+
+```
+$ docker-compose build
+$ docker-compose up
+```
+
+## docker終了
+
+```
+$ docker-compose down
+```
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
