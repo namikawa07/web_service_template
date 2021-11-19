@@ -54,9 +54,15 @@ jobs:
           command: mkdir /tmp/test-results
           working_directory: ~/repo
 
+      # webpack
+      - run:
+         name: yarn Install
+         command: yarn install
+      - run: bundle exec bin/webpack
+
       # run rubocop
       - run: bundle exec rubocop
-    
+
       # run tests
       - run:
           name: RSpec
