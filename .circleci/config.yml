@@ -50,9 +50,6 @@ jobs:
           working_directory: ~/repo
 
       - run:
-          command: NODE_ENV=test bundle exec rails webpacker:compile
-
-      - run:
           name: create directory to store test results
           command: mkdir /tmp/test-results
           working_directory: ~/repo
