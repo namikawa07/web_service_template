@@ -49,6 +49,8 @@ jobs:
           command: bundle exec rails db:migrate
           working_directory: ~/repo
 
+       - run: NODE_ENV=test bundle exec rails webpacker:compile
+
       - run:
           name: create directory to store test results
           command: mkdir /tmp/test-results
