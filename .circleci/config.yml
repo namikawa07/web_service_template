@@ -54,12 +54,6 @@ jobs:
           command: mkdir /tmp/test-results
           working_directory: ~/repo
 
-      # webpack compile
-      - run:
-         name: yarn Install
-         command: yarn install
-      - run: bin/rails assets:precompile RAILS_ENV = production
-
       # run rubocop
       - run: bundle exec rubocop
 
