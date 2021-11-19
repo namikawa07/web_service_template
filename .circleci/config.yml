@@ -58,7 +58,7 @@ jobs:
       - run:
          name: yarn Install
          command: yarn install
-      - run: bin/rails assets:precompile
+      - run: bin/rails assets:precompile RAILS_ENV = production
 
       # run rubocop
       - run: bundle exec rubocop
