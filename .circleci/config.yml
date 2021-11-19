@@ -49,7 +49,7 @@ jobs:
           command: bundle exec rails db:migrate
           working_directory: ~/repo
 
-       - run:
+      - run:
           command: NODE_ENV=test bundle exec rails webpacker:compile
 
       - run:
