@@ -26,9 +26,14 @@ $ docker-compose up
 $ docker-compose down
 ```
 
+## webpacker
 変更を検知して自動的にビルドやブラウザのリロードを行うには、webpack-dev-serverを使う
-## 使用方法
-rails sを走らせているときに別プロセスで$ ./bin/webpack-dev-serverを実行
+#### 使用方法
+rails sを走らせているときに別プロセスで
+```
+$ ./bin/webpack-dev-server
+```
+を実行
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
