@@ -41,6 +41,11 @@ jobs:
             - ~/repo/backend/vendor/bundle
           working_directory: ~/repo
 
+      # yarn install
+      - run:
+         name: yarn Install
+         command: yarn install
+
       # Database setup
       - run:
           command: bundle exec rails db:create
