@@ -35,6 +35,27 @@ $ ./bin/webpack-dev-server
 ```
 を実行
 
+## 開発環境
+#### server
+ruby 2.6.5p114
+Rails 6.1.4.1
+
+#### front
+vue.js (実装中)
+nuxt.js (実装中)
+
+#### database
+postgresql
+
+#### deploy
+heroku (実装中)
+
+#### other
+rubocop 1.23.0
+rspec-rails 4.0.2
+yarn 1.22.15
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
