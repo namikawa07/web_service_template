@@ -41,11 +41,6 @@ jobs:
             - ~/repo/backend/vendor/bundle
           working_directory: ~/repo
 
-      # yarn install
-      - run:
-         name: yarn Install
-         command: yarn install
-
       # Database setup
       - run:
           command: bundle exec rails db:create
@@ -58,6 +53,14 @@ jobs:
           name: create directory to store test results
           command: mkdir /tmp/test-results
           working_directory: ~/repo
+      # yarn install
+      - run:
+         name: yarn Install
+         command: yarn install
+
+      - run:
+         name: webpacker compile for test
+         command: RAILS_ENV=test bundle exec rails webpacker:compile
 
       # run rubocop
       - run: bundle exec rubocop
