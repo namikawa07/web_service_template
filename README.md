@@ -50,6 +50,8 @@ postgresql
 #### heroku
 postgreSQL：hobby-dev
 
+uokun-web-app：herokuのアプリにつけた名前
+
 
 #### other
 rubocop 1.23.0
