@@ -107,7 +107,7 @@ jobs:
       - run:
           name: Deploy to Heroku_Production
           command: |
-            git push https://heroku:HEROKU_API_KEY@git.heroku.com/uokun-web-app.git master
+            git push https://heroku:${HEROKU_API_KEY}@git.heroku.com/uokun-web-app.git master
       - run:
           name: export rails master key
           command: |
