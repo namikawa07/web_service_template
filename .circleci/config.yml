@@ -133,9 +133,6 @@ workflows:
           filters:
             branches:
               ignore: develop
-
-  deploy:
-    jobs:
       - deploy:
           # masterブランチへのpushでのみ反応
           requires:
