@@ -28,4 +28,6 @@ COPY . /app
 # RUN chmod +x /usr/bin/entrypoint.sh
 # ENTRYPOINT ["entrypoint.sh"]
 
+ENV RAILS_ENV=production
+
 CMD bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"

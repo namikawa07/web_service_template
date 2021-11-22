@@ -47,8 +47,9 @@ nuxt.js (実装中)
 #### database
 postgresql
 
-#### deploy
-heroku (実装中)
+#### heroku
+postgreSQL：hobby-dev
+
 
 #### other
 rubocop 1.23.0

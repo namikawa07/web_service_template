@@ -88,3 +88,4 @@ production:
   username: <%= ENV['DB_USERNAME'] || 'postgres' %>
   host: <%= ENV['DB_HOST'] || 'db' %>
   password: <%= ENV['DB_PASSWORD'] || '12345678' %>
+  url: <%= ENV['DATABASE_URL'] %>
