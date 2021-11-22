@@ -103,11 +103,11 @@ jobs:
             fi
       - run:
           name: heroku maintenance on
-          command: heroku maintenance:on --app ${HEROKU_APP_NAME}
+          command: heroku maintenance:on --app uokun-web-app
       - run:
           name: Deploy to Heroku_Production
           command: |
-            git push https://heroku:HEROKU_API_KEY@git.heroku.com/HEROKU_APP_NAME.git master
+            git push https://heroku:HEROKU_API_KEY@git.heroku.com/uokun-web-app.git master
       - run:
           name: export rails master key
           command: |
@@ -115,10 +115,10 @@ jobs:
       - run:
           name: db migration
           command: |
-            heroku run rails db:migrate --app HEROKU_APP_NAME
+            heroku run rails db:migrate --app uokun-web-app
       - run:
           name: heroku maintenance off
-          command: heroku maintenance:off --app HEROKU_APP_NAME
+          command: heroku maintenance:off --app uokun-web-app
 
 workflows:
   version: 2
