@@ -107,7 +107,7 @@ jobs:
       - run:
           name: Deploy to Heroku_Production
           command: |
-            git push https://git.heroku.com/uokun-web-app.git main
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git main
       - run:
           name: export rails master key
           command: |
@@ -129,7 +129,6 @@ workflows:
             branches:
               ignore: develop
       - deploy:
-          context: WEB_SERVER_TEMPLATE
           # masterブランチへのpushでのみ反応
           requires:
             - test_backend
