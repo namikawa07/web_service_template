@@ -89,7 +89,7 @@ jobs:
     docker:
       - image: circleci/ruby:2.6.5-stretch-node
         environment:
-          RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+          RAILS_MASTER_KEY: ENV["RAILS_MASTER_KEY"]
     working_directory: ~/repo
     steps:
       - checkout
@@ -102,12 +102,17 @@ jobs:
               echo "Heroku is already installed. No operation was performed."
             fi
       - run:
+          command: |
+            echo HEROKU_APP_NAME=${HEROKU_APP_NAME} > ~/.env
+            echo HEROKU_API_KEY=${HEROKU_API_KEY} >> ~/.env
+            echo RAILS_MASTER_KEY=${RAILS_MASTER_KEY} >> ~/.config/masterkey
+      - run:
           name: heroku maintenance on
           command: heroku maintenance:on --app ${HEROKU_APP_NAME}
       - run:
           name: Deploy to Heroku_Production
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+            git push https://heroku:${HEROKU_API_KEY}@git.heroku.com/${HEROKU_APP_NAME}.git master
       - run:
           name: export rails master key
           command: |
@@ -133,7 +138,9 @@ workflows:
     jobs:
       - deploy:
           # masterブランチへのpushでのみ反応
+          requires:
+            - test_backend
           filters:
-              branches:
-                  only:
-                  - main
+            branches:
+              only:
+                - main
