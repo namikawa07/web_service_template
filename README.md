@@ -52,6 +52,8 @@ postgreSQL：hobby-dev
 
 uokun-web-app：herokuのアプリにつけた名前
 
+https://uokun-web-app.herokuapp.com/
+
 
 #### other
 rubocop 1.23.0
