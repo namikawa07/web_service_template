@@ -89,7 +89,7 @@ jobs:
     docker:
       - image: circleci/ruby:2.6.5-stretch-node
         environment:
-          RAILS_MASTER_KEY: ENV["RAILS_MASTER_KEY"]
+          RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
     working_directory: ~/repo
     steps:
       - checkout
@@ -103,7 +103,7 @@ jobs:
             fi
       - run:
           name: heroku maintenance on
-          command: heroku maintenance:on --app uokun-web-app
+          command: heroku maintenance:on --app ${HEROKU_APP_NAME}
       - run:
           name: Deploy to Heroku_Production
           command: |
@@ -111,14 +111,14 @@ jobs:
       - run:
           name: export rails master key
           command: |
-            export RAILS_MASTER_KEY=ENV["RAILS_MASTER_KEY"]
+            export RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
       - run:
           name: db migration
           command: |
-            heroku run rails db:migrate --app uokun-web-app
+            heroku run rails db:migrate --app ${HEROKU_APP_NAME}
       - run:
           name: heroku maintenance off
-          command: heroku maintenance:off --app uokun-web-app
+          command: heroku maintenance:off --app ${HEROKU_APP_NAME}
 
 workflows:
   version: 2
