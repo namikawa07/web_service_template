@@ -106,6 +106,10 @@ jobs:
             echo "HEROKU_APP_NAME=${HEROKU_APP_NAME}" >> ~/.env
             echo "HEROKU_API_KEY=${HEROKU_API_KEY}" >> ~/.env
             echo "RAILS_MASTER_KEY=${RAILS_MASTER_KEY}" >> ~/.env
+
+            echo $HEROKU_APP_NAME
+            echo $HEROKU_API_KEY
+            echo $RAILS_MASTER_KEY
       - run:
           name: heroku maintenance on
           command: heroku maintenance:on --app HEROKU_APP_NAME
